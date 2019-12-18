@@ -1,92 +1,149 @@
-// Original grammar stolen from json.org
+# Original grammar stolen from json.org
 
-json -> element
+json -> element {% id %}
 
 value
-    -> object
-    |  array
-    |  string
-    |  number
-    |  "true"
-    |  "false"
-    |  "null"
+    -> object   {% id %}
+    |  array    {% id %}
+    |  string   {% id %}
+    |  number   {% id %}
+    |  "true"   {% () => true %}
+    |  "false"  {% () => false %}
+    |  "null"   {% () => null %}
 
 object
     -> "{" ws "}"
+        {% data => ({}) %}
     |  "{" members "}"
+        {% data => data[1] %}
 
 members
-    -> member
+    -> member   {% id %}
     |  member "," members
+        {%
+            data => {
+                return {
+                    ...data[2],
+                    ...data[0]
+                }
+            }
+        %}
 
 member
     -> ws string ws ":" element
+        {%
+            data => {
+                return {
+                    [data[1]]: data[4]
+                }
+            }
+        %}
 
 array
-    -> "[" ws "]"
+    -> "[" ws "]"  {% () => [] %}
     |  "[" elements "]"
+        {% data => data[1] %}
 
 elements
-    -> element
+    -> element   {% data => [data[0]] %}
     |  element "," elements
+        {%
+            data => {
+                return [data[0], ...data[2]]
+            }
+        %}
 
 element
     -> ws value ws
+        {% data => data[1] %}
 
 string
     -> "\"" characters "\""
+        {% data => data[1] %}
 
 characters
-    -> null
+    -> null    {% () => "" %}
     |  character characters
+        {% data => data[0] + data[1] %}
 
 character
-    -> [^\\\"]
+    -> [^\\\"] {% id %}
     |  "\\" escape
+        {% data => data[1] %}
 
 escape
-    -> "\""
-    |  "\\"
-    |  "/"
-    |  "b"
-    |  "f"
-    |  "n"
-    |  "r"
-    |  "t"
+    -> "\""    {% () => '"'  %}
+    |  "\\"    {% () => "\\" %}
+    |  "/"     {% () => "/"  %}
+    |  "b"     {% () => "\b" %}
+    |  "f"     {% () => "\f" %}
+    |  "n"     {% () => "\n" %}
+    |  "r"     {% () => "\r" %}
+    |  "t"     {% () => "\t" %}
     |  "u" hex hex hex hex
+        {%
+            data =>
+                String
+                .fromCharCode(
+                    ((((data[1] * 16) + data[2]) * 16) + data[3]) * 16 + data[4])
+        %}
 
 hex
-    -> digit
-    |  [A-Fa-f]
+    -> digit    {% id %}
+    |  [Aa]     {% () => 10 %}
+    |  [Bb]     {% () => 11 %}
+    |  [Cc]     {% () => 12 %}
+    |  [Dd]     {% () => 13 %}
+    |  [Ee]     {% () => 14 %}
+    |  [Ff]     {% () => 15 %}
 
 number
     -> integer fraction exponent
+        {%
+            data => {
+                const numberString = data[0] + data[1] + data[2]
+                return Number(numberString)
+            }
+        %}
 
 integer
-    -> digit
+    -> digit    {% id %}
     |  onenine digits
+        {%
+            data => data[0] + data[1]
+        %}
     |  "-" digit
+        {%
+            data => "-" + data[1]
+        %}
     |  "-" onenine digits
+        {%
+            data => "-" + data[1] + data[2]
+        %}
 
 digits
-    -> digit
+    -> digit   {% id %}
     |  digit digits
+        {% data => data[0] + data[1] %}
 
 digit
-    -> "0"
-    |  onenine
+    -> "0"      {% id %}
+    |  onenine  {% id %}
 
 onenine
-    -> [1-9]
+    -> [1-9]    {% id %}
 
 fraction
-    -> null
+    -> null     {% () => "" %}
     |  "." digits
+        {% data => "." + data[1] %}
 
 exponent
-    -> null
-    |  "E" sign digits
-    |  "e" sign digits
+    -> null     {% () => "" %}
+    |  [Ee] sign digits
+        {%
+            data => "e" + data[1] + data[2]
+        %}
 
 sign
     -> null
