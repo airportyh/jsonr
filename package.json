@@ -1,0 +1,16 @@
+{
+  "name": "jsonr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "gen-parser": "nearleyc jsonr.ne -o jsonr.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mz": "^2.7.0",
+    "nearley": "^2.19.0"
+  }
+}
