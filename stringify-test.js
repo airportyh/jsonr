@@ -1,0 +1,39 @@
+const { stringify } = require("./stringify");
+
+console.log(stringify({
+    "name": "Linus",
+    "age": 7,
+    "favoriteNumber": 3.1315926535,
+    "secondFavoriteNumber": -4.53E3,
+    "gender": "male",
+    "inSchool": true,
+    "playsInstruments": true,
+    "likesMovies": false,
+    "extras": null,
+    "friends": [
+        {
+            "name": "Ben"
+        },
+        {
+            "name": "Max"
+        },
+        {
+            "name": "Kaden"
+        },
+        {
+            "name": "Reese"
+        },
+        {
+            "name": "Padgraig"
+        }
+    ],
+    "siblings": [
+        {
+            "name": "Emma"
+        },
+        {
+            "name": "Marty"
+        }
+    ]
+}, "  "
+));

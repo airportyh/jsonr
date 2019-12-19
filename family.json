@@ -1,0 +1,43 @@
+{
+  "toby": &1 {
+    "name": "Toby",
+    "children": &2 [
+      &3 {
+        "name": "Marty",
+        "father": *1,
+        "mother": &4 {
+          "name": "Weilai",
+          "children": *2,
+          "spouse": *1
+        },
+        "siblings": [
+          &5 {
+            "name": "Linus",
+            "father": *1,
+            "mother": *4,
+            "siblings": [
+              *3,
+              &6 {
+                "name": "Emma",
+                "father": *1,
+                "mother": *4,
+                "siblings": [
+                  *5,
+                  *3
+                ]
+              }
+            ]
+          },
+          *6
+        ]
+      },
+      *5,
+      *6
+    ],
+    "spouse": *4
+  },
+  "marty": *3,
+  "linus": *5,
+  "weilai": *4,
+  "emma": *6
+}
