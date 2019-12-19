@@ -1,6 +1,7 @@
 const fs = require("mz/fs");
 const nearley = require("nearley");
 const grammar = require("./jsonr");
+const util = require("util");
 
 async function main() {
     const filename = process.argv[2];
@@ -16,7 +17,9 @@ async function main() {
         console.error("Parse tree is ambigous!");
         process.exit(1);
     }
-    console.log(parser.results[0]);
+    const result = parser.results[0];
+    console.log(util.inspect(result, { depth: 10 }));
+    console.log(result.martin.friend === result.anton);
 }
 
 main().catch((e) => console.log(e.stack));

@@ -1,0 +1,10 @@
+{
+    "anton": &1 {
+        "name": "Anton",
+        "friend": *2
+    },
+    "martin": &2 {
+        "name": "Martin",
+        "friend": *1
+    }
+}

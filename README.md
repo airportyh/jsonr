@@ -29,6 +29,7 @@ with the ID `1`. Thus, Anton's friend is Martin, and vice versa.
 
 ## Todo
 
-* implement ref feature to parser
 * add serializer
 * add data deserialization to parser (done)
+* Investigate weird performance bug (done)
+* implement ref feature to parser (done)

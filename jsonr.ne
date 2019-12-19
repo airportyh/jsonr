@@ -1,6 +1,15 @@
 # Original grammar stolen from json.org
 
-json -> element {% id %}
+@{%
+const { Ref, resolveRefs } = require("./refs");
+let nextId = 1;
+const refDict = {};
+%}
+
+json -> element
+    {%
+        data => resolveRefs(data[0], refDict, new Set())
+    %}
 
 value
     -> object   {% id %}
@@ -10,12 +19,30 @@ value
     |  "true"   {% () => true %}
     |  "false"  {% () => false %}
     |  "null"   {% () => null %}
+    |  ref      {% id %}
 
 object
-    -> "{" ws "}"
-        {% data => ({}) %}
+    -> ref_definition ws "{" ws "}"
+        {%
+            data => {
+                return refDict[nextId++] = {}
+            }
+        %}
+    |  "{" ws "}"
+        {%
+            data => data[1]
+        %}
+    |  ref_definition ws "{" members "}"
+        {%
+            data => {
+                return refDict[nextId++] = data[3]
+            }
+        %}
     |  "{" members "}"
-        {% data => data[1] %}
+        {%
+            data => data[1]
+        %}
+
 
 members
     -> member   {% id %}
@@ -40,9 +67,26 @@ member
         %}
 
 array
-    -> "[" ws "]"  {% () => [] %}
+    -> ref_definition ws "[" ws "]"
+        {%
+            () => {
+                return refDict[nextId++] = []
+            }
+        %}
+    |  "[" ws "]"
+        {%
+            () => []
+        %}
     |  "[" elements "]"
-        {% data => data[1] %}
+        {%
+            data => data[1]
+        %}
+    |  ref_definition ws "[" elements "]"
+        {%
+            data => {
+                return refDict[nextId++] = data[3]
+            }
+        %}
 
 elements
     -> element   {% data => [data[0]] %}
@@ -156,3 +200,17 @@ ws
     |  "\u000A" ws
     |  "\u000D" ws
     |  "\u0009" ws
+
+ref -> "*" digits
+    {%
+        data => {
+            const refId = data[1]
+            if (!(refId in refDict)) {
+                return new Ref(refId);
+            }
+            return refDict[refId]
+        }
+    %}
+
+ref_definition
+    ->  "&" digits
