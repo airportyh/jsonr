@@ -48,7 +48,12 @@ you will encounter the same objects multiple times. For example, `marty` can be 
 by any of the following: `family.marty`, `family.dad.children[0]`, `family.linus.siblings[0]`.
 
 If we try to serialize this object graph using `JSON.stringify(family)`, you'll get a
-circular reference error. But if you do it with JSONR:
+
+```
+TypeError: Converting circular structure to JSON
+```
+
+But if you do it with JSONR:
 
 ```js
 const jsonr = require("jsonr");
@@ -111,6 +116,7 @@ In this JSONR output, `dad` was given the ref ID of 2, `mom` was given 1, `marty
 
 ## Todo
 
+* add refs for strings?
 * fix the family round trip props getting re-ordered
 * load tests
 * maybe rewrite `_stringify`

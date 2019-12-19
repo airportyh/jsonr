@@ -29,3 +29,4 @@ const family = {
 
 const jsonr = require("./jsonr");
 console.log(jsonr.stringify(family, "  "));
+// This would given error: JSON.stringify(family)
