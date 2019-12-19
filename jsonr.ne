@@ -2,13 +2,15 @@
 
 @{%
 const { Ref, resolveRefs } = require("./refs");
-let nextId = 1;
 const refDict = {};
 %}
 
-json -> element
+jsonr -> element
     {%
-        data => resolveRefs(data[0], refDict, new Set())
+        data => {
+            console.log("RefDict:", refDict);
+            return resolveRefs(data[0], refDict, new Set())
+        }
     %}
 
 value
@@ -25,7 +27,7 @@ object
     -> ref_definition ws "{" ws "}"
         {%
             data => {
-                return refDict[nextId++] = {}
+                return refDict[data[0]] = {}
             }
         %}
     |  "{" ws "}"
@@ -35,7 +37,7 @@ object
     |  ref_definition ws "{" members "}"
         {%
             data => {
-                return refDict[nextId++] = data[3]
+                return refDict[data[0]] = data[3]
             }
         %}
     |  "{" members "}"
@@ -69,8 +71,8 @@ member
 array
     -> ref_definition ws "[" ws "]"
         {%
-            () => {
-                return refDict[nextId++] = []
+            data => {
+                return refDict[data[0]] = []
             }
         %}
     |  "[" ws "]"
@@ -84,7 +86,7 @@ array
     |  ref_definition ws "[" elements "]"
         {%
             data => {
-                return refDict[nextId++] = data[3]
+                return refDict[data[0]] = data[3]
             }
         %}
 
@@ -203,14 +205,11 @@ ws
 
 ref -> "*" digits
     {%
-        data => {
-            const refId = data[1]
-            if (!(refId in refDict)) {
-                return new Ref(refId);
-            }
-            return refDict[refId]
-        }
+        data => new Ref(data[1])
     %}
 
 ref_definition
     ->  "&" digits
+    {%
+        data => data[1]
+    %}

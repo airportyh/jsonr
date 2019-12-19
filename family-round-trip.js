@@ -5,10 +5,10 @@ const fs = require("mz/fs");
 async function main() {
     const content = (await fs.readFile("family.json")).toString();
     const result = parse(content);
-    console.log(result.emma.name);
+    // console.log(result.emma.name);
     const output = stringify(result, "  ");
 
-    // console.log(output);
+    console.log(output);
 }
 
 main().catch((e) => console.log(e.message));
