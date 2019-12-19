@@ -2,7 +2,7 @@
   "name": "jsonr",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "jsonr.js",
   "scripts": {
     "gen-parser": "nearleyc lib/jsonr-grammar.ne -o lib/jsonr-grammar.js"
   },
