@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "gen-parser": "nearleyc jsonr.ne -o jsonr.js"
+    "gen-parser": "nearleyc lib/jsonr-grammar.ne -o lib/jsonr-grammar.js"
   },
   "keywords": [],
   "author": "",

@@ -8,7 +8,6 @@ const refDict = {};
 jsonr -> element
     {%
         data => {
-            console.log("RefDict:", refDict);
             return resolveRefs(data[0], refDict, new Set())
         }
     %}

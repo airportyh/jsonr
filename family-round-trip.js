@@ -1,5 +1,4 @@
-const { stringify } = require("./stringify");
-const { parse } = require("./parse");
+const { stringify, parse } = require("./jsonr");
 const fs = require("mz/fs");
 
 async function main() {

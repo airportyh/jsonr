@@ -29,12 +29,14 @@ with the ID `1`. Thus, Anton's friend is Martin, and vice versa.
 
 ## Todo
 
+* use family as example
 * fix the family round trip props getting re-ordered
 * documentation
 * load tests
-* top level jsonr.js file
+* clean up code
 * add data deserialization to parser (done)
 * Investigate weird performance bug (done)
 * implement ref feature to parser (done)
 * add serializer(done)
 * fix bug with family round trip (done)
+* top level jsonr.js file (done)
