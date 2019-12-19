@@ -33,7 +33,8 @@ with the ID `1`. Thus, Anton's friend is Martin, and vice versa.
 * fix the family round trip props getting re-ordered
 * documentation
 * load tests
-* clean up code
+* maybe rewrite `_stringify`
+* clean up code (done)
 * add data deserialization to parser (done)
 * Investigate weird performance bug (done)
 * implement ref feature to parser (done)

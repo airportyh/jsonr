@@ -1,4 +1,4 @@
-# Original grammar stolen from json.org
+# Original grammar stolen from json.org, then modified.
 
 @{%
 const { Ref, resolveRefs } = require("./refs");
@@ -13,37 +13,53 @@ jsonr -> element
     %}
 
 value
-    -> object   {% id %}
-    |  array    {% id %}
-    |  string   {% id %}
-    |  number   {% id %}
-    |  "true"   {% () => true %}
-    |  "false"  {% () => false %}
-    |  "null"   {% () => null %}
-    |  ref      {% id %}
+    -> object                {% id %}
+    |  array                 {% id %}
+    |  string                {% id %}
+    |  number                {% id %}
+    |  "true"                {% () => true %}
+    |  "false"               {% () => false %}
+    |  "null"                {% () => null %}
+    |  ref                   {% id %}
+    |  ref_object_definition {% id %}
+    |  ref_array_definition  {% id %}
+
+ref_object_definition
+    -> ref_definition ws object
+        {%
+            data => {
+                return refDict[data[0]] = data[2]
+            }
+        %}
+
+ref_array_definition
+    -> ref_definition ws array
+        {%
+            data => {
+                return refDict[data[0]] = data[2]
+            }
+        %}
+
+ref -> "*" digits
+    {%
+        data => new Ref(data[1])
+    %}
+
+ref_definition
+    ->  "&" digits
+    {%
+        data => data[1]
+    %}
 
 object
-    -> ref_definition ws "{" ws "}"
-        {%
-            data => {
-                return refDict[data[0]] = {}
-            }
-        %}
-    |  "{" ws "}"
+    ->  "{" ws "}"
         {%
             data => data[1]
-        %}
-    |  ref_definition ws "{" members "}"
-        {%
-            data => {
-                return refDict[data[0]] = data[3]
-            }
         %}
     |  "{" members "}"
         {%
             data => data[1]
         %}
-
 
 members
     -> member   {% id %}
@@ -68,25 +84,13 @@ member
         %}
 
 array
-    -> ref_definition ws "[" ws "]"
-        {%
-            data => {
-                return refDict[data[0]] = []
-            }
-        %}
-    |  "[" ws "]"
+    ->  "[" ws "]"
         {%
             () => []
         %}
     |  "[" elements "]"
         {%
             data => data[1]
-        %}
-    |  ref_definition ws "[" elements "]"
-        {%
-            data => {
-                return refDict[data[0]] = data[3]
-            }
         %}
 
 elements
@@ -201,14 +205,3 @@ ws
     |  "\u000A" ws
     |  "\u000D" ws
     |  "\u0009" ws
-
-ref -> "*" digits
-    {%
-        data => new Ref(data[1])
-    %}
-
-ref_definition
-    ->  "&" digits
-    {%
-        data => data[1]
-    %}
