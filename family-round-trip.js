@@ -2,38 +2,25 @@ const { stringify, parse } = require("./jsonr");
 const fs = require("mz/fs");
 
 async function main() {
-    const toby = {
-        name: "Toby"
-    };
+    const dad = { name: "Toby" };
+    const mom = { name: "Wendy" };
+    dad.spouse = mom;
+    mom.spouse = dad;
 
-    const marty = {
-        name: "Marty"
-    };
-
-    const linus = {
-        name: "Linus"
-    };
-
-    const weilai = {
-        name: "Weilai"
-    };
-
-    const emma = {
-        name: "Emma"
-    };
+    const marty = { name: "Marty" };
+    const linus = { name: "Linus" };
+    const emma = { name: "Emma" };
 
     const children = [
         marty, linus, emma
     ];
-    toby.children = children;
 
-    weilai.children = children;
+    dad.children = children;
+    mom.children = children;
 
-    toby.spouse = weilai;
-    weilai.spouse = toby;
-    for (let child of toby.children) {
-        child.father = toby;
-        child.mother = weilai;
+    for (let child of children) {
+        child.father = dad;
+        child.mother = mom;
     }
 
     marty.siblings = [linus, emma];
@@ -41,7 +28,7 @@ async function main() {
     emma.siblings = [linus, marty];
 
     const family = {
-        toby, marty, linus, weilai, emma
+        mom, dad, marty, linus, emma
     };
     const version1 = stringify(family, "  ");
     await fs.writeFile("family.json", version1);

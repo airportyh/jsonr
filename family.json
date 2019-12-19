@@ -1,43 +1,43 @@
 {
-  "toby": &1 {
-    "name": "Toby",
-    "children": &2 [
-      &3 {
-        "name": "Marty",
-        "father": *1,
-        "mother": &4 {
-          "name": "Weilai",
-          "children": *2,
-          "spouse": *1
+  "mom": &1 {
+    "name": "Wendy",
+    "spouse": &2 {
+      "name": "Toby",
+      "spouse": *1,
+      "children": &3 [
+        &4 {
+          "name": "Marty",
+          "father": *2,
+          "mother": *1,
+          "siblings": [
+            &5 {
+              "name": "Linus",
+              "father": *2,
+              "mother": *1,
+              "siblings": [
+                *4,
+                &6 {
+                  "name": "Emma",
+                  "father": *2,
+                  "mother": *1,
+                  "siblings": [
+                    *5,
+                    *4
+                  ]
+                }
+              ]
+            },
+            *6
+          ]
         },
-        "siblings": [
-          &5 {
-            "name": "Linus",
-            "father": *1,
-            "mother": *4,
-            "siblings": [
-              *3,
-              &6 {
-                "name": "Emma",
-                "father": *1,
-                "mother": *4,
-                "siblings": [
-                  *5,
-                  *3
-                ]
-              }
-            ]
-          },
-          *6
-        ]
-      },
-      *5,
-      *6
-    ],
-    "spouse": *4
+        *5,
+        *6
+      ]
+    },
+    "children": *3
   },
-  "marty": *3,
+  "dad": *2,
+  "marty": *4,
   "linus": *5,
-  "weilai": *4,
   "emma": *6
 }
