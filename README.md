@@ -8,6 +8,12 @@ A ref allows the same object to be referenced multiple
 times within a file, so that referential equality will be preserved by the serialization.
 The syntax of refs follow the refs feature in YAML.
 
+## Install
+
+```
+npm install airportyh/jsonr
+```
+
 ## Example
 
 Let's say you want to model a family of people and the relationships between them.
@@ -56,7 +62,7 @@ TypeError: Converting circular structure to JSON
 But if you do it with JSONR:
 
 ```js
-const jsonr = require("jsonr");
+const jsonr = require("airportyh/jsonr");
 console.log(jsonr.stringify(family, "  "));
 ```
 You get (output):
