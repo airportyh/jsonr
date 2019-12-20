@@ -12,5 +12,9 @@
   "dependencies": {
     "mz": "^2.7.0",
     "nearley": "^2.19.0"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/airportyh/jsonr"
   }
 }
