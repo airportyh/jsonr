@@ -67,8 +67,8 @@ members
         {%
             data => {
                 return {
-                    ...data[2],
-                    ...data[0]
+                    ...data[0],
+                    ...data[2]
                 }
             }
         %}

@@ -116,9 +116,9 @@ In this JSONR output, `dad` was given the ref ID of 2, `mom` was given 1, `marty
 
 ## Todo
 
-* add refs for strings?
-* fix the family round trip props getting re-ordered
+* publish to npm
 * load tests
+* add refs for strings?
 * maybe rewrite `_stringify`
 * clean up code (done)
 * add data deserialization to parser (done)
@@ -129,3 +129,4 @@ In this JSONR output, `dad` was given the ref ID of 2, `mom` was given 1, `marty
 * top level jsonr.js file (done)
 * documentation (done)
 * use family as example (done)
+* fix the family round trip props getting re-ordered (done)

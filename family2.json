@@ -1,43 +1,43 @@
 {
-  "emma": &1 {
-    "siblings": [
-      &2 {
-        "siblings": [
-          &3 {
-            "siblings": [
-              *2,
-              *1
-            ],
-            "mother": &4 {
-              "children": &5 [
-                *3,
-                *2,
-                *1
-              ],
-              "spouse": &6 {
-                "children": *5,
-                "spouse": *4,
-                "name": "Toby"
-              },
-              "name": "Wendy"
+  "mom": &1 {
+    "name": "Wendy",
+    "spouse": &2 {
+      "name": "Toby",
+      "spouse": *1,
+      "children": &3 [
+        &4 {
+          "name": "Marty",
+          "father": *2,
+          "mother": *1,
+          "siblings": [
+            &5 {
+              "name": "Linus",
+              "father": *2,
+              "mother": *1,
+              "siblings": [
+                *4,
+                &6 {
+                  "name": "Emma",
+                  "father": *2,
+                  "mother": *1,
+                  "siblings": [
+                    *5,
+                    *4
+                  ]
+                }
+              ]
             },
-            "father": *6,
-            "name": "Marty"
-          },
-          *1
-        ],
-        "mother": *4,
-        "father": *6,
-        "name": "Linus"
-      },
-      *3
-    ],
-    "mother": *4,
-    "father": *6,
-    "name": "Emma"
+            *6
+          ]
+        },
+        *5,
+        *6
+      ]
+    },
+    "children": *3
   },
-  "linus": *2,
-  "marty": *3,
-  "dad": *6,
-  "mom": *4
+  "dad": *2,
+  "marty": *4,
+  "linus": *5,
+  "emma": *6
 }
