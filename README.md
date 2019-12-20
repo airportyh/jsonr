@@ -120,6 +120,11 @@ with the ID `1`.
 In this JSONR output, `dad` was given the ref ID of 2, `mom` was given 1, `marty` was given 4,
 `linus` 5, and `emma` 6. The `children` array which was shared by mom and dad was given the ref ID of 3.
 
+Another benefit of refs, other than allowing the serialization of objects graphs with circular
+references, is the saving of file size when there exists shared references. One application of
+this concept is the serialization of immutable data structures which make heavy use of structural
+sharing.
+
 ## Todo
 
 * load tests
