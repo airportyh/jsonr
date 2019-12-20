@@ -125,6 +125,14 @@ references, is the saving of file size when there exists shared references. One 
 this concept is the serialization of immutable data structures which make heavy use of structural
 sharing.
 
+## API
+
+JSONR, like JSON has 2 API methods:
+
+* `parse(jsonrString)` - takes a JSONR string, and returns a JavaScript data structure
+* `stringify(data, indent)` - takes a JavaScript data structure, a string representing indentation
+amount such as `"  "`, and returns a string in JSONR format.
+
 ## Todo
 
 * load tests
