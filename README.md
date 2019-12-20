@@ -135,6 +135,7 @@ amount such as a tab or 2 spaces, and returns a string in JSONR format.
 ## Todo
 
 * load tests
+* learn about the Lempel-Ziv-Welch algorithm and maybe use it instead
 * add refs for strings?
 * maybe rewrite `_stringify`
 * publish to npm (done)
