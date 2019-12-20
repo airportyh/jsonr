@@ -131,7 +131,7 @@ JSONR, like JSON has 2 API methods:
 
 * `parse(jsonrString)` - takes a JSONR string, and returns a JavaScript data structure
 * `stringify(data, indent)` - takes a JavaScript data structure, a string representing indentation
-amount such as `"  "`, and returns a string in JSONR format.
+amount such as a tab or 2 spaces, and returns a string in JSONR format.
 
 ## Todo
 
