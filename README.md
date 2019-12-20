@@ -11,7 +11,7 @@ The syntax of refs follow the refs feature in YAML.
 ## Install
 
 ```
-npm install airportyh/jsonr
+npm install @airportyh/jsonr
 ```
 
 ## Example
@@ -62,7 +62,7 @@ TypeError: Converting circular structure to JSON
 But if you do it with JSONR:
 
 ```js
-const jsonr = require("airportyh/jsonr");
+const jsonr = require("@airportyh/jsonr");
 console.log(jsonr.stringify(family, "  "));
 ```
 You get (output):
