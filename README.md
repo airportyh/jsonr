@@ -115,7 +115,6 @@ You get (output):
 
 The `&<NUMBER>` tag (ex. `&1`) defines the ref ID of an object or array which follows that tag.
 The `*<NUMBER>` syntax (ex. `*1`) refers the the object that was defined with the given ref ID.
-with the ID `1`.
 
 In this JSONR output, `dad` was given the ref ID of 2, `mom` was given 1, `marty` was given 4,
 `linus` 5, and `emma` 6. The `children` array which was shared by mom and dad was given the ref ID of 3.
