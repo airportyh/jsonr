@@ -122,10 +122,10 @@ In this JSONR output, `dad` was given the ref ID of 2, `mom` was given 1, `marty
 
 ## Todo
 
-* publish to npm
 * load tests
 * add refs for strings?
 * maybe rewrite `_stringify`
+* publish to npm (done)
 * clean up code (done)
 * add data deserialization to parser (done)
 * Investigate weird performance bug (done)
