@@ -54,7 +54,7 @@ ref_definition
 object
     ->  "{" ws "}"
         {%
-            data => data[1]
+            data => ({})
         %}
     |  "{" members "}"
         {%

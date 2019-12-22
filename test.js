@@ -2,7 +2,7 @@ const fs = require("mz/fs");
 const nearley = require("nearley");
 const grammar = require("./jsonr");
 const util = require("util");
-const { parse } = require("./parse");
+const { parse } = require("./jsonr");
 
 async function main() {
     const filename = process.argv[2];
