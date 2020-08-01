@@ -1,23 +1,27 @@
 {
   "name": "@airportyh/jsonr",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "jsonr.js",
   "scripts": {
     "prepublish": "npm run gen-parser",
-    "gen-parser": "nearleyc lib/jsonr-grammar.ne -o lib/jsonr-grammar.js"
+    "gen-parser": "nearleyc lib/jsonr-grammar.ne -o lib/jsonr-grammar.js",
+    "build": "rollup -c"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nearley": "^2.19.0"
   },
   "devDependencies": {
-    "mz": "^2.7.0"
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "mz": "^2.7.0",
+    "rollup": "^2.23.0",
+    "nearley": "^2.19.1"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/airportyh/jsonr"
+    "type": "git",
+    "url": "https://github.com/airportyh/jsonr"
   }
 }

@@ -63,7 +63,7 @@ object
 
 members
     -> member   {% id %}
-    |  member "," members
+    |  members "," member
         {%
             data => {
                 return {
@@ -95,10 +95,10 @@ array
 
 elements
     -> element   {% data => [data[0]] %}
-    |  element "," elements
+    |  elements "," element
         {%
             data => {
-                return [data[0], ...data[2]]
+                return [...data[0], data[2]]
             }
         %}
 
@@ -112,7 +112,7 @@ string
 
 characters
     -> null    {% () => "" %}
-    |  character characters
+    |  characters character 
         {% data => data[0] + data[1] %}
 
 character
@@ -172,7 +172,7 @@ integer
 
 digits
     -> digit   {% id %}
-    |  digit digits
+    |  digits digit 
         {% data => data[0] + data[1] %}
 
 digit
