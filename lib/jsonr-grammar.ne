@@ -43,13 +43,13 @@ ref_array_definition
             }
         %}
 
-ref -> "*" digits
+ref -> "*" number
     {%
         data => new Ref(data[1])
     %}
 
 ref_definition
-    ->  "&" digits
+    ->  "&" number
     {%
         data => data[1]
     %}
@@ -113,7 +113,7 @@ string
     -> %string
         {%
             (data) => {
-                return JSON.stringify(data[0].value);
+                return JSON.parse(data[0].value);
             }
         %}
 
@@ -125,4 +125,4 @@ number
             }
         %}
 
-ws  -> %WS:*
+ws  -> ( %NL | %WS ):*
