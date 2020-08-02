@@ -1,9 +1,12 @@
 # Original grammar stolen from json.org, then modified.
 
 @{%
+const lexer = require("./lexer");
 const { Ref, resolveRefs } = require("./refs");
 const refDict = {};
 %}
+
+@lexer lexer
 
 jsonr -> element
     {%
@@ -107,101 +110,19 @@ element
         {% data => data[1] %}
 
 string
-    -> "\"" characters "\""
-        {% data => data[1] %}
-
-characters
-    -> null    {% () => "" %}
-    |  characters character 
-        {% data => data[0] + data[1] %}
-
-character
-    -> [^\\\"] {% id %}
-    |  "\\" escape
-        {% data => data[1] %}
-
-escape
-    -> "\""    {% () => '"'  %}
-    |  "\\"    {% () => "\\" %}
-    |  "/"     {% () => "/"  %}
-    |  "b"     {% () => "\b" %}
-    |  "f"     {% () => "\f" %}
-    |  "n"     {% () => "\n" %}
-    |  "r"     {% () => "\r" %}
-    |  "t"     {% () => "\t" %}
-    |  "u" hex hex hex hex
+    -> %string
         {%
-            data =>
-                String
-                .fromCharCode(
-                    ((((data[1] * 16) + data[2]) * 16) + data[3]) * 16 + data[4])
-        %}
-
-hex
-    -> digit    {% id %}
-    |  [Aa]     {% () => 10 %}
-    |  [Bb]     {% () => 11 %}
-    |  [Cc]     {% () => 12 %}
-    |  [Dd]     {% () => 13 %}
-    |  [Ee]     {% () => 14 %}
-    |  [Ff]     {% () => 15 %}
-
-number
-    -> integer fraction exponent
-        {%
-            data => {
-                const numberString = data[0] + data[1] + data[2]
-                return Number(numberString)
+            (data) => {
+                return JSON.stringify(data[0].value);
             }
         %}
 
-integer
-    -> digit    {% id %}
-    |  onenine digits
+number
+    -> %number
         {%
-            data => data[0] + data[1]
-        %}
-    |  "-" digit
-        {%
-            data => "-" + data[1]
-        %}
-    |  "-" onenine digits
-        {%
-            data => "-" + data[1] + data[2]
+            data => {
+                return Number(data[0].value);
+            }
         %}
 
-digits
-    -> digit   {% id %}
-    |  digits digit 
-        {% data => data[0] + data[1] %}
-
-digit
-    -> "0"      {% id %}
-    |  onenine  {% id %}
-
-onenine
-    -> [1-9]    {% id %}
-
-fraction
-    -> null     {% () => "" %}
-    |  "." digits
-        {% data => "." + data[1] %}
-
-exponent
-    -> null     {% () => "" %}
-    |  [Ee] sign digits
-        {%
-            data => "e" + data[1] + data[2]
-        %}
-
-sign
-    -> null
-    |  "+"
-    |  "-"
-
-ws
-    -> null
-    |  "\u0020" ws
-    |  "\u000A" ws
-    |  "\u000D" ws
-    |  "\u0009" ws
+ws  -> %WS:*
