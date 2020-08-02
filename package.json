@@ -1,6 +1,6 @@
 {
   "name": "@airportyh/jsonr",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "",
   "main": "jsonr.js",
   "scripts": {
