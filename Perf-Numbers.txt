@@ -1,0 +1,17 @@
+# Right Recursion
+
+real	1m20.109s
+user	1m52.601s
+sys	0m3.085s
+
+# After Left Recursion Fix
+
+real	0m3.500s
+user	0m6.380s
+sys	0m0.395s
+
+# After Lexer
+
+real	0m2.279s
+user	0m4.238s
+sys	0m0.416s
