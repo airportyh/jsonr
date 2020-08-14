@@ -4,14 +4,28 @@ real	1m20.109s
 user	1m52.601s
 sys	0m3.085s
 
+462.5 lines per second
+
 # After Left Recursion Fix
 
 real	0m3.500s
 user	0m6.380s
 sys	0m0.395s
 
+10571 lines per second  (23 times faster)
+
 # After Lexer
 
 real	0m2.279s
 user	0m4.238s
 sys	0m0.416s
+
+16235 lines per second  (35 times faster)
+
+# Functional Parser
+
+real	0m0.333s
+user	0m0.300s
+sys	0m0.046s
+
+111111 lines per second (240 times faster / 6.8 faster than after lexer)
